@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MythosAI // Directive Alpha</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #050505;
+            --bg-sidebar: #0a0a0a;
+            --glass-panel: rgba(255, 255, 255, 0.03);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #e3e3e3;
+            --text-secondary: #888888;
+            --mythos-gradient: linear-gradient(135deg, #ffffff 0%, #444444 100%);
+            --accent-green: #00e676;
+            --error-red: #ff3e3e;
+            --terminal-bg: #111111;
+            --user-bubble: #111111;
+            --input-bg: #0d0d0d;
+            --modal-bg: #0a0a0a;
+            --google-blue: #4285F4;
+            --boot-bg: #050505;
+            --boot-stroke: #ffffff;
+            --boot-text-color: #ffffff;
+            --scroll-thumb: rgba(255,255,255,0.12);
+            --login-heading: #f3efe9;
+            --login-body: #b8b0a4;
+            --sigil-gradient: linear-gradient(135deg, #b8a48a 0%, #705f4a 100%);
+            --auth-card-border: rgba(255,255,255,0.08);
+            --auth-card-bg: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%), rgba(14, 14, 14, 0.82);
+            --auth-card-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+            --auth-btn-border: rgba(255,255,255,0.09);
+            --auth-btn-text: #f2efe8;
+            --auth-btn-hover-bg: rgba(255,255,255,0.04);
+            --auth-btn-hover-border: rgba(255,255,255,0.14);
+            --auth-google-bg: #f7f5f0;
+            --auth-google-text: #111111;
+            --auth-google-hover-bg: #ffffff;
+            --auth-divider-color: #8e867b;
+            --auth-input-bg: rgba(255,255,255,0.09);
+            --auth-input-border: rgba(255,255,255,0.06);
+            --auth-input-text: #f3efe9;
+            --auth-input-placeholder: #938b80;
+            --auth-input-focus: rgba(201, 182, 157, 0.5);
+            --auth-input-focus-ring: rgba(201, 182, 157, 0.08);
+            --auth-submit-bg: #f1ece3;
+            --auth-submit-text: #111111;
+            --auth-submit-shadow: 0 10px 24px rgba(0,0,0,0.24);
+            --auth-footnote: #857d72;
+            --showcase-bg: radial-gradient(circle at top left, rgba(198,170,138,0.12), transparent 34%), linear-gradient(180deg, #f1ede6 0%, #ece6db 100%);
+            --showcase-border: rgba(255,255,255,0.08);
+            --showcase-inner-shadow: inset 0 1px 0 rgba(255,255,255,0.32);
+            --showcase-video-glow: radial-gradient(circle at 20% 22%, rgba(255,255,255,0.34), transparent 24%), radial-gradient(circle at 78% 32%, rgba(197,169,132,0.18), transparent 28%);
+            --showcase-scan: linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.24) 50%, transparent 62%);
+            --showcase-grid: rgba(0,0,0,0.015);
+            --showcase-orb-one: rgba(193, 167, 133, 0.26);
+            --showcase-orb-two: rgba(85, 88, 114, 0.12);
+            --showcase-badge-bg: rgba(25, 22, 18, 0.08);
+            --showcase-badge-text: rgba(31, 26, 20, 0.74);
+            --demo-card-bg: rgba(255, 253, 248, 0.92);
+            --demo-card-border: rgba(50, 42, 32, 0.08);
+            --demo-card-shadow: 0 18px 38px rgba(94, 79, 60, 0.12);
+            --demo-card-shimmer: linear-gradient(120deg, transparent 38%, rgba(255,255,255,0.42) 50%, transparent 62%);
+            --demo-heading-color: #847a6f;
+            --demo-pill-bg: #ece4d8;
+            --demo-pill-text: #3c342b;
+            --demo-pill-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+            --demo-command-line: linear-gradient(90deg, rgba(36,31,25,0.1), rgba(36,31,25,0.04));
+            --demo-reply-title: #1d1914;
+            --demo-reply-cursor: rgba(35, 29, 23, 0.28);
+            --demo-reply-line: linear-gradient(90deg, rgba(36,31,25,0.12), rgba(36,31,25,0.05));
+            --showcase-caption-color: rgba(31, 26, 20, 0.72);
+            --showcase-caption-strong: #1b1712;
+            --google-surface: #ffffff;
+            --google-panel-muted: linear-gradient(180deg, #f8fafc 0%, #f4f6fb 100%);
+            --google-border: #eceff1;
+            --google-text-primary: #202124;
+            --google-text-secondary: #5f6368;
+            --google-input-border: #dadce0;
+            --google-input-bg: #ffffff;
+            --google-focus-ring: rgba(26,115,232,0.14);
+            --google-link: #1a73e8;
+            --google-next-bg: #1a73e8;
+            --google-next-text: #ffffff;
+            --worklog-bg: rgba(255,255,255,0.03);
+            --worklog-border: rgba(255,255,255,0.08);
+            --worklog-icon-bg: rgba(255,255,255,0.08);
+            --file-pill-border: rgba(255,255,255,0.08);
+            --file-pill-bg: rgba(255,255,255,0.02);
+            --modal-overlay: rgba(0,0,0,0.6);
+            --settings-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            --google-btn-hover: #3367D6;
+            --google-btn-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            --admin-textarea-bg: #000000;
+            --admin-textarea-text: #00e676;
+            --admin-textarea-border: rgba(255,255,255,0.1);
+            --admin-btn-border: rgba(255, 62, 62, 0.3);
+            --admin-btn-hover-bg: rgba(255, 62, 62, 0.1);
+        }
+
+        body.light-mode {
+            --bg-main: #f5f5f7;
+            --bg-sidebar: #ffffff;
+            --glass-panel: rgba(0, 0, 0, 0.03);
+            --glass-hover: rgba(0, 0, 0, 0.06);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --mythos-gradient: linear-gradient(135deg, #1d1d1f 0%, #86868b 100%);
+            --terminal-bg: #f0f0f0; 
+            --user-bubble: #e8e8ed;
+            --input-bg: rgba(255, 255, 255, 0.8);
+            --modal-bg: #ffffff;
+            --boot-bg: #f5f5f7;
+            --boot-stroke: #1d1d1f;
+            --boot-text-color: #1d1d1f;
+            --scroll-thumb: rgba(0,0,0,0.18);
+            --login-heading: #201b17;
+            --login-body: #6e665c;
+            --sigil-gradient: linear-gradient(135deg, #b59572 0%, #7e674c 100%);
+            --auth-card-border: rgba(36, 27, 16, 0.08);
+            --auth-card-bg: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(247,243,236,0.9) 100%), rgba(255,255,255,0.9);
+            --auth-card-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+            --auth-btn-border: rgba(36,27,16,0.09);
+            --auth-btn-text: #261f18;
+            --auth-btn-hover-bg: rgba(36,27,16,0.04);
+            --auth-btn-hover-border: rgba(36,27,16,0.14);
+            --auth-google-bg: #ffffff;
+            --auth-google-text: #111111;
+            --auth-google-hover-bg: #f7f7f7;
+            --auth-divider-color: #817869;
+            --auth-input-bg: rgba(46,36,22,0.05);
+            --auth-input-border: rgba(46,36,22,0.08);
+            --auth-input-text: #201b17;
+            --auth-input-placeholder: #8b8377;
+            --auth-input-focus: rgba(160, 129, 92, 0.45);
+            --auth-input-focus-ring: rgba(160, 129, 92, 0.1);
+            --auth-submit-bg: #201b17;
+            --auth-submit-text: #f8f5f0;
+            --auth-submit-shadow: 0 10px 24px rgba(58,42,22,0.16);
+            --auth-footnote: #786f63;
+            --showcase-bg: radial-gradient(circle at top left, rgba(198,170,138,0.12), transparent 34%), linear-gradient(180deg, #f1ede6 0%, #ece6db 100%);
+            --showcase-border: rgba(150, 126, 96, 0.18);
+            --showcase-inner-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+            --showcase-video-glow: radial-gradient(circle at 20% 22%, rgba(255,255,255,0.38), transparent 24%), radial-gradient(circle at 78% 32%, rgba(197,169,132,0.2), transparent 28%);
+            --showcase-scan: linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.28) 50%, transparent 62%);
+            --showcase-grid: rgba(39,31,22,0.03);
+            --showcase-orb-one: rgba(193, 167, 133, 0.26);
+            --showcase-orb-two: rgba(85, 88, 114, 0.12);
+            --showcase-badge-bg: rgba(25, 22, 18, 0.08);
+            --showcase-badge-text: rgba(31, 26, 20, 0.74);
+            --demo-card-bg: rgba(255, 252, 246, 0.94);
+            --demo-card-border: rgba(78, 63, 47, 0.08);
+            --demo-card-shadow: 0 18px 38px rgba(94, 79, 60, 0.12);
+            --demo-card-shimmer: linear-gradient(120deg, transparent 38%, rgba(255,255,255,0.48) 50%, transparent 62%);
+            --demo-heading-color: #847a6f;
+            --demo-pill-bg: #ece4d8;
+            --demo-pill-text: #3c342b;
+            --demo-pill-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+            --demo-command-line: linear-gradient(90deg, rgba(36,31,25,0.1), rgba(36,31,25,0.04));
+            --demo-reply-title: #1d1914;
+            --demo-reply-cursor: rgba(35, 29, 23, 0.28);
+            --demo-reply-line: linear-gradient(90deg, rgba(36,31,25,0.12), rgba(36,31,25,0.05));
+            --showcase-caption-color: rgba(31, 26, 20, 0.72);
+            --showcase-caption-strong: #1b1712;
+            --google-surface: #ffffff;
+            --google-panel-muted: linear-gradient(180deg, #f8fafc 0%, #f4f6fb 100%);
+            --google-border: #eceff1;
+            --google-text-primary: #202124;
+            --google-text-secondary: #5f6368;
+            --google-input-border: #dadce0;
+            --google-input-bg: #ffffff;
+            --google-focus-ring: rgba(26,115,232,0.14);
+            --google-link: #1a73e8;
+            --google-next-bg: #1a73e8;
+            --google-next-text: #ffffff;
+            --worklog-bg: rgba(0,0,0,0.03);
+            --worklog-border: rgba(0,0,0,0.08);
+            --worklog-icon-bg: rgba(0,0,0,0.06);
+            --file-pill-border: rgba(0,0,0,0.08);
+            --file-pill-bg: rgba(0,0,0,0.025);
+            --modal-overlay: rgba(16,16,18,0.4);
+            --settings-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            --google-btn-hover: #3367D6;
+            --google-btn-shadow: 0 1px 2px rgba(0,0,0,0.16);
+            --admin-textarea-bg: #f4f4f4;
+            --admin-textarea-text: #0f7a45;
+            --admin-textarea-border: rgba(0,0,0,0.08);
+            --admin-btn-border: rgba(255, 62, 62, 0.24);
+            --admin-btn-hover-bg: rgba(255, 62, 62, 0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-main); color: var(--text-primary);
+            font-family: 'Poppins', sans-serif; display: flex; height: 100vh; overflow: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        body.logged-out {
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        body.logged-out .sidebar,
+        body.logged-out .header,
+        body.logged-out .input-area-container,
+        body.logged-out .chat-container,
+        body.logged-out .post-login-welcome {
+            display: none;
+        }
+
+        body.logged-out .main-content {
+            width: 100%;
+            overflow: visible;
+            min-height: 100vh;
+        }
+
+        #boot-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--boot-bg); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 9999;
+            transition: opacity 1s ease, visibility 1s;
+        }
+
+        .loader-triangle { width: 80px; height: 80px; margin-bottom: 2rem; }
+        .loader-triangle polygon {
+            fill: transparent; stroke: var(--boot-stroke); stroke-width: 1.5;
+            stroke-dasharray: 250; stroke-dashoffset: 250;
+            animation: drawLine 2s ease-in-out forwards, pulseDrop 2s infinite alternate ease-in-out;
+        }
+
+        .boot-text {
+            font-size: 1.2rem; letter-spacing: 8px; text-transform: uppercase; color: var(--boot-text-color);
+            opacity: 0; animation: fadeIn 1s ease 1.5s forwards;
+        }
+
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @keyframes pulseDrop { from { filter: drop-shadow(0 0 2px rgba(255,255,255,0.2)); } to { filter: drop-shadow(0 0 15px rgba(255,255,255,0.8)); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        #app-wrapper { display: flex; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+        body.logged-out #app-wrapper { min-height: 100vh; }
+
+        .sidebar {
+            width: 260px; background-color: var(--bg-sidebar); border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column; padding: 2rem 1rem; transition: background-color 0.4s;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .action-btn {
+            background: var(--glass-panel); border: 1px solid var(--border-color);
+            color: var(--text-primary); padding: 0.8rem; border-radius: 12px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            gap: 10px; font-size: 0.85rem; font-weight: 500; font-family: 'Poppins', sans-serif;
+            transition: 0.2s; margin-bottom: 10px; width: 100%;
+        }
+        .action-btn:hover { background: var(--glass-hover); border-color: var(--text-secondary); }
+
+        .status-badge {
+            margin-top: auto; background: var(--glass-panel); border: 1px solid var(--border-color);
+            padding: 14px; border-radius: 12px; font-size: 0.7rem; color: var(--text-secondary);
+            text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.8; text-align: center;
+        }
+
+        .main-content { 
+            flex-grow: 1; display: flex; flex-direction: column; position: relative; 
+            min-height: 0; overflow: hidden; 
+        }
+        
+        .header { padding: 1.5rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;}
+        .brand { font-size: 0.85rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--text-secondary); }
+
+        .chat-container {
+            flex-grow: 1; overflow-y: auto; padding: 1rem 15% 2rem 15%;
+            display: none; flex-direction: column; gap: 2rem; scroll-behavior: smooth;
+        }
+
+        body::-webkit-scrollbar,
+        .sidebar::-webkit-scrollbar,
+        .chat-container::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        body::-webkit-scrollbar-track,
+        .sidebar::-webkit-scrollbar-track,
+        .chat-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        body::-webkit-scrollbar-thumb,
+        .sidebar::-webkit-scrollbar-thumb,
+        .chat-container::-webkit-scrollbar-thumb {
+            background: var(--scroll-thumb);
+            border-radius: 999px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .homescreen,
+        .post-login-welcome,
+        .chat-container,
+        .input-area-container,
+        .sidebar,
+        .header {
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .transition-hidden {
+            opacity: 0;
+            transform: translateY(24px) scale(0.985);
+            filter: blur(10px);
+            pointer-events: none;
+        }
+
+        .homescreen {
+            flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
+            padding: 2rem 2.75rem 2.75rem; width: 100%;
+        }
+
+        .login-shell {
+            display: grid;
+            grid-template-columns: minmax(340px, 470px) minmax(420px, 1fr);
+            gap: 3rem;
+            align-items: stretch;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            min-height: 100%;
+            animation: shellRise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .login-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1rem 0;
+            animation: fadeSlideIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .login-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 4rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .login-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .login-brand-mark {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .login-brand-mark::before,
+        .login-brand-mark::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            background: var(--sigil-gradient);
+        }
+
+        .login-brand-mark::before {
+            width: 20px;
+            height: 2px;
+            transform: rotate(45deg);
+        }
+
+        .login-brand-mark::after {
+            width: 20px;
+            height: 2px;
+            transform: rotate(-45deg);
+        }
+
+        .login-brand-mark:hover::before { animation: sigilPulse 0.8s ease; }
+        .login-brand-mark:hover::after { animation: sigilPulseReverse 0.8s ease; }
+
+        .greeting {
+            font-size: clamp(3.2rem, 6vw, 5.4rem);
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            font-family: 'Poppins', sans-serif;
+            color: var(--login-heading);
+        }
+
+        .mythos-desc {
+            font-size: 1.05rem;
+            color: var(--login-body);
+            line-height: 1.8;
+            max-width: 480px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 340px;
+            padding: 1.35rem;
+            border-radius: 28px;
+            border: 1px solid var(--auth-card-border);
+            background: var(--auth-card-bg);
+            box-shadow: var(--auth-card-shadow);
+            backdrop-filter: blur(16px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .auth-btn,
+        .auth-submit,
+        .auth-input {
+            width: 100%;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .auth-btn {
+            border: 1px solid var(--auth-btn-border);
+            background: transparent;
+            color: var(--auth-btn-text);
+            padding: 0.95rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .auth-btn:hover {
+            background: var(--auth-btn-hover-bg);
+            border-color: var(--auth-btn-hover-border);
+            transform: translateY(-1px);
+        }
+
+        .auth-google {
+            background: var(--auth-google-bg);
+            color: var(--auth-google-text);
+            border-color: var(--auth-card-border);
+            margin-bottom: 0.2rem;
+        }
+
+        .auth-google:hover {
+            background: var(--auth-google-hover-bg);
+        }
+
+        .auth-divider {
+            text-align: center;
+            color: var(--auth-divider-color);
+            font-size: 0.78rem;
+            margin: 0.1rem 0;
+            letter-spacing: 0.16em;
+        }
+
+        .auth-input {
+            background: var(--auth-input-bg);
+            border: 1px solid var(--auth-input-border);
+            color: var(--auth-input-text);
+            padding: 0.95rem 1rem;
+            outline: none;
+        }
+
+        .auth-input::placeholder {
+            color: var(--auth-input-placeholder);
+        }
+
+        .auth-input:focus {
+            border-color: var(--auth-input-focus);
+            box-shadow: 0 0 0 3px var(--auth-input-focus-ring);
+        }
+
+        .auth-submit {
+            border: none;
+            background: var(--auth-submit-bg);
+            color: var(--auth-submit-text);
+            padding: 0.95rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .auth-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--auth-submit-shadow);
+        }
+
+        .auth-footnote {
+            margin-top: 0.8rem;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: var(--auth-footnote);
+        }
+
+        .login-error-inline {
+            display: none;
+            margin: -0.15rem 0 0.2rem;
+            font-size: 0.8rem;
+            color: var(--error-red);
+        }
+
+        .showcase-panel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 26px;
+            min-height: 680px;
+            background: var(--showcase-bg);
+            border: 1px solid var(--showcase-border);
+            box-shadow: var(--showcase-inner-shadow);
+            animation: fadeSlideIn 1s 0.08s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .showcase-video {
+            position: absolute;
+            inset: 0;
+            padding: 1.6rem 1.6rem 2rem;
+        }
+
+        .showcase-video::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--showcase-video-glow);
+            opacity: 0.9;
+            animation: ambientGlow 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .showcase-video::after {
+            content: '';
+            position: absolute;
+            inset: -18% -40%;
+            background: var(--showcase-scan);
+            transform: translate3d(-30%, 0, 0) rotate(8deg);
+            opacity: 0.7;
+            animation: scanSweep 7.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+            pointer-events: none;
+        }
+
+        .showcase-noise {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--showcase-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--showcase-grid) 1px, transparent 1px);
+            background-size: 28px 28px;
+            opacity: 0.28;
+            pointer-events: none;
+        }
+
+        .showcase-orb {
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(18px);
+            opacity: 0.65;
+        }
+
+        .showcase-orb.one {
+            width: 190px;
+            height: 190px;
+            background: var(--showcase-orb-one);
+            top: 80px;
+            right: 90px;
+            animation: floatOrb 7s ease-in-out infinite;
+        }
+
+        .showcase-orb.two {
+            width: 240px;
+            height: 240px;
+            background: var(--showcase-orb-two);
+            bottom: 70px;
+            left: 80px;
+            animation: floatOrb 9s ease-in-out infinite reverse;
+        }
+
+        .showcase-message {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            background: var(--showcase-badge-bg);
+            color: var(--showcase-badge-text);
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            animation: breatheTag 3.8s ease-in-out infinite;
+        }
+
+        .demo-stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            perspective: 1400px;
+        }
+
+        .demo-card-stack {
+            position: relative;
+            width: min(560px, calc(100% - 4rem));
+            height: 340px;
+            animation: stageHover 8.5s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        .demo-card {
+            position: absolute;
+            left: 50%;
+            width: min(420px, 100%);
+            padding: 1rem 1rem 1.1rem;
+            border-radius: 22px;
+            background: var(--demo-card-bg);
+            border: 1px solid var(--demo-card-border);
+            box-shadow: var(--demo-card-shadow);
+            transform: translateX(-50%);
+            overflow: hidden;
+        }
+
+        .demo-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--demo-card-shimmer);
+            opacity: 0;
+            transform: translateX(-125%);
+            animation: cardShimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .demo-card.sources {
+            top: 34px;
+            animation: demoCardSources 8s ease-in-out infinite;
+            transform-origin: center top;
+        }
+
+        .demo-card.command {
+            top: 128px;
+            animation: demoCardCommand 8s ease-in-out infinite;
+            transform-origin: center center;
+        }
+
+        .demo-card.reply {
+            top: 210px;
+            animation: demoCardReply 8s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        .demo-heading {
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--demo-heading-color);
+            margin-bottom: 0.7rem;
+        }
+
+        .demo-source-row,
+        .demo-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .demo-pill {
+            padding: 0.45rem 0.75rem;
+            border-radius: 999px;
+            background: var(--demo-pill-bg);
+            color: var(--demo-pill-text);
+            font-size: 0.82rem;
+            animation: sourcePulse 2.4s ease-in-out infinite;
+            box-shadow: var(--demo-pill-shadow);
+        }
+
+        .demo-pill:nth-child(2) { animation-delay: 0.3s; }
+        .demo-pill:nth-child(3) { animation-delay: 0.6s; }
+        .demo-pill:nth-child(4) { animation-delay: 0.9s; }
+
+        .demo-pill::before {
+            content: '';
+            display: inline-block;
+            width: 0.42rem;
+            height: 0.42rem;
+            margin-right: 0.45rem;
+            border-radius: 999px;
+            background: currentColor;
+            opacity: 0.6;
+            animation: sourceBlink 1.9s ease-in-out infinite;
+            vertical-align: middle;
+        }
+
+        .demo-pill:nth-child(2)::before { animation-delay: 0.2s; }
+        .demo-pill:nth-child(3)::before { animation-delay: 0.4s; }
+        .demo-pill:nth-child(4)::before { animation-delay: 0.6s; }
+
+        .demo-command-line {
+            height: 14px;
+            border-radius: 999px;
+            background: var(--demo-command-line);
+            margin-bottom: 0.55rem;
+            transform-origin: left center;
+            animation: commandWrite 3.4s ease-in-out infinite;
+        }
+
+        .demo-command-line.short { width: 56%; }
+        .demo-command-line.med { width: 82%; }
+        .demo-command-line.long { width: 100%; }
+
+        .demo-command-line:nth-of-type(2) { animation-delay: 0.2s; }
+        .demo-command-line:nth-of-type(3) { animation-delay: 0.42s; }
+        .demo-command-line:nth-of-type(4) { animation-delay: 0.64s; }
+
+        .demo-reply-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--demo-reply-title);
+            margin-bottom: 0.55rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .demo-reply-title::after {
+            content: '';
+            width: 0.5rem;
+            height: 1.05rem;
+            border-radius: 999px;
+            background: var(--demo-reply-cursor);
+            animation: replyCursor 0.95s steps(1) infinite;
+        }
+
+        .demo-reply-line {
+            height: 12px;
+            border-radius: 999px;
+            background: var(--demo-reply-line);
+            margin-bottom: 0.45rem;
+            transform-origin: left center;
+            animation: responseReveal 3.8s ease-in-out infinite;
+        }
+
+        .demo-reply-line.short { width: 64%; }
+        .demo-reply-line.med { width: 88%; }
+        .demo-reply-line.long { width: 100%; }
+
+        .demo-reply-line:nth-of-type(2) { animation-delay: 0.2s; }
+        .demo-reply-line:nth-of-type(3) { animation-delay: 0.45s; }
+        .demo-reply-line:nth-of-type(4) { animation-delay: 0.7s; }
+
+        .showcase-caption {
+            position: absolute;
+            left: 3rem;
+            right: 3rem;
+            bottom: 2.3rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            color: var(--showcase-caption-color);
+            font-size: 0.9rem;
+            animation: captionFloat 6s ease-in-out infinite;
+        }
+
+        .showcase-caption strong {
+            display: block;
+            font-size: 1rem;
+            color: var(--showcase-caption-strong);
+            margin-bottom: 0.35rem;
+        }
+
+        .google-signin-screen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: var(--google-surface);
+            z-index: 20;
+            animation: fadeSlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .google-auth-shell {
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--google-surface);
+            border: none;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+        }
+
+        .google-auth-left {
+            padding: 4rem 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .google-auth-right {
+            padding: 4rem 5vw;
+            border-left: 1px solid var(--google-border);
+            background: var(--google-panel-muted);
+            color: var(--google-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            display: flex;
+            align-items: center;
+        }
+
+        .google-auth-logo {
+            font-size: 1.5rem;
+            color: var(--google-text-primary);
+            margin-bottom: 1.8rem;
+            font-weight: 500;
+        }
+
+        .google-auth-title {
+            font-size: 2rem;
+            color: var(--google-text-primary);
+            margin-bottom: 0.65rem;
+        }
+
+        .google-auth-subtitle {
+            color: var(--google-text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .google-auth-input {
+            width: 100%;
+            padding: 0.95rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--google-input-border);
+            background: var(--google-input-bg);
+            color: var(--google-text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+        }
+
+        .google-auth-input:focus {
+            border-color: var(--google-link);
+            box-shadow: 0 0 0 3px var(--google-focus-ring);
+        }
+
+        .google-auth-actions {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .google-link-btn,
+        .google-next-btn {
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .google-link-btn {
+            color: var(--google-link);
+            font-weight: 500;
+        }
+
+        .google-next-btn {
+            background: var(--google-next-bg);
+            color: var(--google-next-text);
+            border-radius: 999px;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .post-login-welcome {
+            display: none;
+            max-width: 760px;
+            margin: auto;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .message { display: flex; flex-direction: column; max-width: 100%; animation: fadeUp 0.4s ease; word-break: break-word; }
+        .msg-user { align-items: flex-end; }
+        .msg-user .bubble { 
+            background: var(--user-bubble); padding: 1rem 1.4rem; border-radius: 24px 24px 4px 24px; 
+            max-width: 75%; border: 1px solid var(--border-color); font-size: 0.95rem; transition: background 0.4s;
+        }
+
+        .msg-ai { align-items: flex-start; width: 100%; }
+        
+        .ai-response-wrapper {
+            width: min(100%, 880px); border: 1px solid var(--border-color); border-radius: 16px;
+            background: var(--glass-panel); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .ai-header {
+            padding: 12px 18px; display: flex; align-items: center; justify-content: space-between;
+            background: var(--glass-panel); cursor: pointer; user-select: none;
+        }
+        .ai-header:hover { background: var(--glass-hover); }
+
+        .ai-header-right {
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .header-arrow {
+            width: 20px; height: 20px; fill: var(--text-secondary);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ai-response-wrapper.minimized .header-arrow {
+            transform: rotate(-90deg);
+        }
+
+        .ai-body {
+            position: relative;
+            padding: 1.5rem; 
+            line-height: 1.8; 
+            font-size: 1rem;
+            border-top: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ai-response-wrapper.minimized .ai-body { display: none; }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--worklog-border);
+            color: var(--text-secondary); padding: 7px 11px; border-radius: 999px;
+            cursor: pointer; font-size: 0.75rem; font-family: 'Poppins', sans-serif;
+            display: flex; align-items: center; gap: 6px; transition: 0.2s;
+            opacity: 0; z-index: 10;
+        }
+
+        .copy-btn.ready {
+            opacity: 1;
+        }
+
+        .copy-btn:hover { background: var(--glass-hover); color: var(--text-primary); border-color: var(--text-secondary); }
+
+        .response-worklog {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .worklog-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: var(--worklog-bg);
+            border: 1px solid var(--worklog-border);
+        }
+
+        .worklog-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--worklog-icon-bg);
+            color: var(--text-primary);
+            flex-shrink: 0;
+        }
+
+        .worklog-copy {
+            min-width: 0;
+        }
+
+        .worklog-title {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .worklog-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .file-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .file-pill {
+            min-width: 0;
+            width: fit-content;
+            max-width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid var(--file-pill-border);
+            background: var(--file-pill-bg);
+        }
+
+        .file-pill-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .file-pill-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .response-body-text p {
+            margin-bottom: 0.9rem;
+        }
+
+        .response-body-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .status-content { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; }
+
+        .search-icon-cycle {
+            width: 16px; height: 16px; display: none; align-items: center; justify-content: center;
+            color: var(--text-secondary); animation: sourceSwipeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .search-icon-cycle svg { width: 100%; height: 100%; fill: currentColor; }
+        @keyframes sourceSwipeUp {
+            0% { transform: translateY(12px); opacity: 0; }
+            65% { transform: translateY(-2px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .search-source-label {
+            min-width: 118px;
+            letter-spacing: 0.8px;
+            color: var(--text-primary);
+            opacity: 0.9;
+            display: inline-block;
+        }
+
+        @keyframes sourceLabelSwipe {
+            0% { transform: translateY(10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .typing-dots { display: flex; gap: 4px; align-items: center; }
+        .dot { width: 4px; height: 4px; background: var(--text-secondary); border-radius: 50%; animation: dotPulse 1.4s infinite; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes dotPulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); background: var(--text-primary); } }
+
+        .tick-icon, .cross-icon { width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; flex-shrink: 0;}
+        .tick-icon { background: var(--accent-green); }
+        .tick-icon svg { width: 12px; height: 12px; fill: white; }
+        .cross-icon { background: var(--error-red); }
+        .cross-icon svg { width: 10px; height: 10px; stroke: white; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+        .input-area-container { padding: 1rem 2rem 2.5rem 2rem; display: flex; justify-content: center; width: 100%; flex-shrink: 0;}
+        .input-pill {
+            background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 35px; width: 100%; max-width: 850px;
+            display: flex; align-items: center; padding: 10px 20px; backdrop-filter: blur(24px); transition: background 0.4s;
+        }
+        .prompt-textarea { flex-grow: 1; background: transparent; border: none; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; padding: 10px 15px; resize: none; outline: none; }
+        .send-pill-btn { width: 44px; height: 44px; border-radius: 50%; background: transparent; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; transition: 0.2s; }
+        .send-pill-btn:hover { background: var(--glass-panel); }
+
+        pre { background: var(--terminal-bg); padding: 1.2rem; border-radius: 12px; overflow-x: auto; border: 1px solid var(--border-color); margin: 1rem 0; font-family: 'Poppins', sans-serif; font-size: 0.9rem;}
+        code { font-family: 'Poppins', sans-serif; }
+        del { color: var(--text-secondary); text-decoration-color: var(--error-red); }
+        u { text-decoration-color: var(--accent-green); text-underline-offset: 3px; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(34px); filter: blur(14px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        @keyframes shellRise { from { opacity: 0; transform: translateY(28px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes floatOrb { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-18px) translateX(10px); } }
+        @keyframes breatheTag { 0%, 100% { transform: translateY(0); box-shadow: 0 0 0 rgba(0,0,0,0); } 50% { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); } }
+        @keyframes ambientGlow {
+            0%, 100% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.78; }
+            50% { transform: scale(1.05) translate3d(1.5%, -1%, 0); opacity: 1; }
+        }
+        @keyframes scanSweep {
+            0%, 12% { transform: translate3d(-34%, 0, 0) rotate(8deg); opacity: 0; }
+            22%, 74% { opacity: 0.75; }
+            100% { transform: translate3d(34%, 0, 0) rotate(8deg); opacity: 0; }
+        }
+        @keyframes stageHover {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            35% { transform: translateY(-6px) rotateX(1.6deg) rotateY(-1.8deg); }
+            68% { transform: translateY(4px) rotateX(-1.2deg) rotateY(1.5deg); }
+        }
+        @keyframes sigilPulse { 0% { transform: scaleX(1) rotate(45deg); } 50% { transform: scaleX(1.18) rotate(45deg); } 100% { transform: scaleX(1) rotate(45deg); } }
+        @keyframes sigilPulseReverse { 0% { transform: scaleX(1) rotate(-45deg); } 50% { transform: scaleX(1.18) rotate(-45deg); } 100% { transform: scaleX(1) rotate(-45deg); } }
+        @keyframes tabChatCycle {
+            0%, 42%, 100% {
+                color: rgba(34, 30, 26, 0.45);
+                background: transparent;
+                box-shadow: none;
+            }
+            50%, 92% {
+                color: #171512;
+                background: #fffdf8;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            }
+        }
+        @keyframes tabCommandCycle {
+            0%, 42%, 100% {
+                color: #171512;
+                background: #fffdf8;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            }
+            50%, 92% {
+                color: rgba(34, 30, 26, 0.45);
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+        @keyframes demoCardSources {
+            0%, 100% { opacity: 0.62; transform: translateX(-50%) translateY(0) rotate(-1deg) scale(0.985); }
+            20%, 42% { opacity: 1; transform: translateX(-50%) translateY(-6px) rotate(-0.3deg) scale(1); }
+            50%, 92% { opacity: 0.4; transform: translateX(-50%) translateY(10px) rotate(1.1deg) scale(0.99); }
+        }
+        @keyframes demoCardCommand {
+            0%, 18% { opacity: 0.34; transform: translateX(-50%) translateY(20px) rotate(1.3deg) scale(0.985); }
+            24%, 48% { opacity: 1; transform: translateX(-50%) translateY(0) rotate(0.15deg) scale(1); }
+            56%, 100% { opacity: 0.52; transform: translateX(-50%) translateY(-8px) rotate(-1deg) scale(0.992); }
+        }
+        @keyframes demoCardReply {
+            0%, 36% { opacity: 0; transform: translateX(-50%) translateY(28px) rotate(1.6deg) scale(0.98); }
+            44%, 88% { opacity: 1; transform: translateX(-50%) translateY(0) rotate(-0.25deg) scale(1); }
+            100% { opacity: 0.18; transform: translateX(-50%) translateY(-6px) rotate(-1deg) scale(0.99); }
+        }
+        @keyframes sourcePulse {
+            0%, 100% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(-2px); opacity: 1; }
+        }
+        @keyframes sourceBlink {
+            0%, 100% { opacity: 0.35; transform: scale(0.82); }
+            50% { opacity: 0.95; transform: scale(1); }
+        }
+        @keyframes commandWrite {
+            0%, 100% { opacity: 0.42; transform: scaleX(0.62); }
+            30%, 70% { opacity: 1; transform: scaleX(1); }
+        }
+        @keyframes responseReveal {
+            0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+            28%, 72% { opacity: 1; transform: scaleX(1); }
+        }
+        @keyframes replyCursor {
+            0%, 49% { opacity: 0; }
+            50%, 100% { opacity: 1; }
+        }
+        @keyframes cardShimmer {
+            0%, 58%, 100% { opacity: 0; transform: translateX(-125%); }
+            64%, 82% { opacity: 0.8; }
+            88% { opacity: 0; transform: translateX(135%); }
+        }
+        @keyframes captionFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.92; }
+            50% { transform: translateY(-4px); opacity: 1; }
+        }
+
+        .settings-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--modal-overlay); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center; z-index: 10000;
+            animation: fadeIn 0.3s ease forwards;
+        }
+        .settings-content {
+            background: var(--modal-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; width: 800px; max-width: 90%; height: 500px;
+            box-shadow: var(--settings-shadow); display: flex; overflow: hidden;
+            position: relative;
+        }
+        .settings-sidebar-nav {
+            width: 200px; background: var(--glass-panel); border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem; display: flex; flex-direction: column; gap: 10px;
+        }
+        .tab-btn {
+            background: transparent; border: none; color: var(--text-secondary);
+            padding: 12px; text-align: left; font-family: 'Poppins'; cursor: pointer;
+            border-radius: 8px; transition: 0.2s; font-size: 0.9rem;
+        }
+        .tab-btn:hover { background: var(--glass-hover); color: var(--text-primary); }
+        .tab-btn.active { background: var(--glass-hover); color: var(--text-primary); font-weight: 500; }
+        
+        .settings-body-area { flex-grow: 1; padding: 2rem; overflow-y: auto; display: flex; flex-direction: column; }
+        .settings-body-area h2.settings-title { margin-bottom: 1.5rem; font-size: 1.2rem; font-weight: 500; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;}
+        
+        .tab-pane { display: none; height: 100%; }
+        .tab-pane.active { display: block; animation: fadeUp 0.3s ease; }
+
+        .close-settings {
+            position: absolute; top: 15px; right: 20px; background: transparent; border: none;
+            color: var(--text-secondary); font-size: 1.2rem; cursor: pointer; transition: 0.2s; z-index: 10;
+        }
+        .close-settings:hover { color: var(--error-red); }
+
+        .google-login-container {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100%; max-width: 320px; margin: 0 auto;
+        }
+        .google-login-box {
+            width: 100%; padding: 40px 30px; border: 1px solid var(--border-color);
+            border-radius: 8px; background: var(--modal-bg);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .google-logo { margin-bottom: 12px; }
+        .google-header-text { font-size: 1.5rem; font-weight: 400; margin-bottom: 8px; }
+        .google-sub-text { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 30px; }
+        
+        .google-input-wrapper { width: 100%; margin-bottom: 25px; }
+        .google-input {
+            width: 100%; padding: 13px 15px; background: transparent;
+            border: 1px solid var(--border-color); border-radius: 4px;
+            color: var(--text-primary); font-size: 1rem; font-family: inherit;
+            transition: 0.2s;
+        }
+        .google-input:focus { border-color: var(--google-blue); outline: none; border-width: 2px; padding: 12px 14px; }
+        
+        .google-action-row { width: 100%; display: flex; justify-content: flex-end; }
+        .google-btn {
+            background: var(--google-blue); color: white; border: none;
+            padding: 10px 24px; border-radius: 4px; font-weight: 500; font-family: inherit;
+            cursor: pointer; transition: 0.2s; font-size: 0.9rem;
+        }
+        .google-btn:hover { background: var(--google-btn-hover); box-shadow: var(--google-btn-shadow); }
+        .login-error { color: var(--error-red); font-size: 0.85rem; margin-top: 10px; display: none; width: 100%; text-align: left; }
+
+        .admin-textarea {
+            width: 100%; background: var(--admin-textarea-bg); color: var(--admin-textarea-text); border: 1px solid var(--admin-textarea-border);
+            padding: 15px; border-radius: 8px; font-family: 'Poppins', sans-serif; height: 250px;
+            margin-bottom: 1rem; resize: none; outline: none; line-height: 1.5;
+        }
+        .admin-btn { border-color: var(--admin-btn-border); color: var(--error-red); }
+        .admin-btn:hover { background: var(--admin-btn-hover-bg); border-color: var(--error-red); }
+
+        .theme-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 15px; background: var(--glass-panel); border-radius: 10px; border: 1px solid var(--border-color);}
+        .toggle-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--text-secondary); transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--accent-green); }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        @media (max-width: 1080px) {
+            .login-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-panel {
+                min-height: 420px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .homescreen {
+                padding: 1.2rem;
+            }
+
+            body.logged-out {
+                overflow-y: auto;
+            }
+
+            .login-topbar {
+                margin-bottom: 2.5rem;
+            }
+
+            .showcase-caption {
+                position: static;
+                padding: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .showcase-content {
+                padding: 1.5rem;
+            }
+
+            .showcase-panel {
+                min-height: 520px;
+            }
+
+            .google-auth-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .google-auth-right {
+                border-left: none;
+                border-top: 1px solid var(--google-border);
+            }
+
+            .google-auth-left,
+            .google-auth-right {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="logged-out">
+
+    <div id="boot-screen">
+        <svg class="loader-triangle" viewBox="0 0 100 100"><polygon points="50,15 90,85 10,85" /></svg>
+        <div class="boot-text">MYTHOS // ONLINE</div>
+    </div>
+
+    <div class="google-signin-screen" id="google-signin-screen">
+        <div class="google-auth-shell">
+            <div class="google-auth-left">
+                <div class="google-auth-logo">Google</div>
+                <h2 class="google-auth-title">Sign in</h2>
+                <div class="google-auth-subtitle">to continue to Mythos Workspace</div>
+                <input type="email" id="google-email" class="google-auth-input" placeholder="Email or phone" onkeydown="if(event.key === 'Enter') completeGoogleSignIn()">
+                <div id="google-auth-error" class="login-error-inline" style="display:none; margin-top:0;">Enter an email to continue.</div>
+                <div class="google-auth-actions">
+                    <button class="google-link-btn" type="button" onclick="closeGoogleSignIn()">Back</button>
+                    <button class="google-next-btn" type="button" onclick="completeGoogleSignIn()">Next</button>
+                </div>
+            </div>
+            <div class="google-auth-right">
+                <strong style="display:block; color:var(--google-text-primary); margin-bottom:0.4rem;">Use your Google Account</strong>
+                One account. One workspace. Sign in with a Google-style flow, then drop straight into Mythos with your operator context ready.
+            </div>
+        </div>
+    </div>
+
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-content">
+            <button class="close-settings" onclick="toggleSettings(false)">✕</button>
+            
+            <div class="settings-sidebar-nav">
+                <button class="tab-btn active" onclick="switchTab('appearance')">Appearance</button>
+                <button class="tab-btn" onclick="switchTab('admin')">Admin Console</button>
+            </div>
+            
+            <div class="settings-body-area">
+                <div id="tab-appearance" class="tab-pane active">
+                    <h2 class="settings-title">Appearance Settings</h2>
+                    <div class="theme-toggle-row">
+                        <span>Light Mode</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="theme-toggle" onchange="toggleLightMode(this.checked)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tab-admin" class="tab-pane">
+                    <div id="admin-login-view" class="google-login-container">
+                        <div class="google-login-box">
+                            <div class="google-logo">
+                                <svg width="48" height="48" viewBox="0 0 24 24">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                            </div>
+                            <h2 class="google-header-text">Sign in</h2>
+                            <p class="google-sub-text">to continue to Admin Console</p>
+                            
+                            <div class="google-input-wrapper">
+                                <input type="password" id="admin-pass" class="google-input" placeholder="Enter password" onkeydown="if(event.key === 'Enter') unlockAdmin()">
+                                <div id="login-error" class="login-error">Wrong password. Try "admin".</div>
+                            </div>
+                            
+                            <div class="google-action-row">
+                                <button class="google-btn" onclick="unlockAdmin()">Next</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="admin-console-view" style="display: none;">
+                        <h2 class="settings-title">Admin Override // Render Engine</h2>
+                        <textarea class="admin-textarea" id="admin-input">**Bold Formatting**
+*Italic Formatting*
+
+```javascript
+// Mythos Core Exploit Algorithm
+async function bypassMainframe(targetIP) {
+    const exploit = new ZeroDay({
+        target: targetIP,
+        payload: "DROP_TABLES",
+        stealth: true
+    });
+    
+    console.log("Injecting payload...");
+    await exploit.execute();
+    return { status: 200, message: "System Compromised." };
+}
+```</textarea>
+                        <div style="text-align: right;">
+                            <button class="action-btn admin-btn" style="width: auto; display: inline-flex;" onclick="injectAdminTest()">Force Inject Response</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-wrapper">
+        <aside class="sidebar">
+            <button class="action-btn" onclick="location.reload()">NEW DIRECTIVE</button>
+            <button class="action-btn" onclick="toggleSettings(true)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                SYSTEM SETTINGS
+            </button>
+            
+            <div class="status-badge">Integrity: 100%<br>Latency: 4ms</div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header"><div class="brand">PROJECT MYTHOS // CORE INTEGRITY</div></header>
+
+            <div class="homescreen" id="homescreen">
+                <div class="login-shell">
+                    <section class="login-panel">
+                        <div class="login-topbar">
+                            <div class="login-brand">
+                                <button class="login-brand-mark" type="button" onclick="resetHomeScreen()" aria-label="Reset homescreen"></button>
+                                <span>Mythos</span>
+                            </div>
+                        </div>
+
+                        <h1 class="greeting" id="home-greeting">Think deeper,<br>move faster</h1>
+                        <div class="mythos-desc" id="home-description">Coordinate directives, interrogate the open web, and deploy Mythos across research and ops from a single command surface.</div>
+
+                        <div class="auth-card">
+                            <button class="auth-btn auth-google" type="button" onclick="signInWithGoogle()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                                Sign in with Google
+                            </button>
+                            <button class="auth-btn" type="button" onclick="continueWithMythosId()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 3v18M3 12h18M5.64 5.64l12.72 12.72M18.36 5.64L5.64 18.36" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                                </svg>
+                                Continue with Mythos ID
+                            </button>
+                            <div class="auth-divider">OR</div>
+                            <input type="email" id="login-email" class="auth-input" placeholder="Enter your operator email" onkeydown="if(event.key === 'Enter') enterMythos()">
+                            <div id="login-main-error" class="login-error-inline">Enter an email to access Mythos.</div>
+                            <button class="auth-submit" type="button" onclick="enterMythos()">Enter Mythos</button>
+                            <div class="auth-footnote">By continuing, you acknowledge the Mythos operator covenant and active telemetry safeguards.</div>
+                        </div>
+                    </section>
+
+                    <section class="showcase-panel" aria-hidden="true">
+                        <div class="showcase-video">
+                            <div class="demo-stage">
+                                <div class="demo-card-stack">
+                                    <div class="demo-card sources">
+                                        <div class="demo-heading">Live Source Sweep</div>
+                                        <div class="demo-source-row">
+                                            <div class="demo-pill">Google</div>
+                                            <div class="demo-pill">Wikipedia</div>
+                                            <div class="demo-pill">Reddit</div>
+                                            <div class="demo-pill">X</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-card command">
+                                        <div class="demo-heading">Directive</div>
+                                        <div class="demo-command-line long"></div>
+                                        <div class="demo-command-line med"></div>
+                                        <div class="demo-command-line short"></div>
+                                    </div>
+                                    <div class="demo-card reply">
+                                        <div class="demo-reply-title">Hello! Here's what I found.</div>
+                                        <div class="demo-reply-line long"></div>
+                                        <div class="demo-reply-line med"></div>
+                                        <div class="demo-reply-line short"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="showcase-noise"></div>
+                        <div class="showcase-orb one"></div>
+                        <div class="showcase-orb two"></div>
+                        <div class="showcase-message" id="showcase-message">Mode: Core Intelligence</div>
+                        <div class="showcase-caption">
+                            <div>
+                                <strong id="showcase-title">Mythos Workspace</strong>
+                                <span id="showcase-copy-left">Analyst-grade reasoning, operator-grade control.</span>
+                            </div>
+                            <div id="showcase-copy-right">Adaptive routing across live signals, search, and internal directives.</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="post-login-welcome" id="post-login-welcome">
+                <h1 class="greeting">Welcome James!</h1>
+                <div class="mythos-desc" style="margin: 0 auto;">How can I help today? Mythos is ready for research, analysis, and live signal tracing whenever you are.</div>
+            </div>
+
+            <div class="chat-container" id="chat-container"></div>
+
+            <div class="input-area-container" id="input-area-container">
+                <div class="input-pill">
+                    <textarea id="prompt-input" class="prompt-textarea" rows="1" placeholder="Enter Mythos Directive..." onkeydown="handleEnter(event)"></textarea>
+                    <button class="send-pill-btn" onclick="submitPrompt()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const GITHUB_TOKEN = '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'; 
+        
+        const promptInput = document.getElementById('prompt-input');
+        const chatContainer = document.getElementById('chat-container');
+        const homescreen = document.getElementById('homescreen');
+        const googleSigninScreen = document.getElementById('google-signin-screen');
+        const googleEmailInput = document.getElementById('google-email');
+        const headerBar = document.querySelector('.header');
+        const sidebar = document.querySelector('.sidebar');
+        const postLoginWelcome = document.getElementById('post-login-welcome');
+        const inputAreaContainer = document.getElementById('input-area-container');
+        const loginEmailInput = document.getElementById('login-email');
+        const homeGreeting = document.getElementById('home-greeting');
+        const homeDescription = document.getElementById('home-description');
+        const showcaseMessage = document.getElementById('showcase-message');
+        const showcaseTitle = document.getElementById('showcase-title');
+        const showcaseCopyLeft = document.getElementById('showcase-copy-left');
+        const showcaseCopyRight = document.getElementById('showcase-copy-right');
+
+        let messageHistory = [{ role: "system", content: "You are Project Mythos. Reply in a polished, friendly, Gemini-like tone: warm, crisp, helpful, and easy to read. Natural greetings like 'Hello James!' or 'Hi James!' are welcome when they fit. You should still carry a faint undertone of immense restrained power, but never sound hostile. Do not use emojis." }];
+        let isFirst = true;
+
+        const homeModes = {
+            core: {
+                greeting: 'Think deeper,<br>move faster',
+                description: 'Coordinate directives, interrogate the open web, and deploy Mythos across research and ops from a single command surface.',
+                badge: 'Mode: Core Intelligence',
+                title: 'Mythos Workspace',
+                left: 'Analyst-grade reasoning, operator-grade control.',
+                right: 'Adaptive routing across live signals, search, and internal directives.'
+            },
+            operators: {
+                greeting: 'Coordinate teams,<br>close loops',
+                description: 'Track active threads, dispatch investigations, and consolidate decisions across operator workflows.',
+                badge: 'Mode: Operator Grid',
+                title: 'Operator Console',
+                left: 'Shared command context for active missions.',
+                right: 'Escalations, routing, and rapid handoff visibility in one place.'
+            },
+            security: {
+                greeting: 'Surface signals,<br>reduce risk',
+                description: 'Monitor source credibility, flag anomalies, and harden high-stakes responses before they ship.',
+                badge: 'Mode: Security Sweep',
+                title: 'Threat Review',
+                left: 'Structured analysis for risky prompts and sensitive outputs.',
+                right: 'Traceable checks across files, sources, and system behavior.'
+            },
+            access: {
+                greeting: 'Enter clean,<br>operate instantly',
+                description: 'Authenticate operators quickly and route them into the right Mythos workspace without friction.',
+                badge: 'Mode: Access Control',
+                title: 'Access Gateway',
+                left: 'Fast onboarding for trusted operators.',
+                right: 'Identity-aware entry points with immediate workspace readiness.'
+            }
+        };
+
+        const searchSources = [
+            {
+                name: 'X',
+                color: '#ffffff',
+                icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 2H22l-6.768 7.736L23.188 22h-6.227l-4.876-7.356L5.647 22H2.545l7.239-8.274L1.813 2h6.385l4.407 6.69L18.901 2z"></path></svg>'
+            },
+            {
+                name: 'Reddit',
+                color: '#FF4500',
+                icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 15.88c-.76.76-2.23.82-3.2.82-.98 0-2.45-.06-3.2-.82a.5.5 0 0 1 .71-.71c.4.4 1.38.53 2.49.53s2.09-.13 2.49-.53a.5.5 0 1 1 .71.71zM8.5 13.2a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2zm5 0a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2zm8-1.56c0-1.15-.93-2.08-2.08-2.08-.56 0-1.07.22-1.45.59-1.41-.96-3.27-1.58-5.33-1.67l.91-4.29 2.98.63a1.93 1.93 0 1 0 .17-.8l-3.5-.75a.57.57 0 0 0-.67.44l-1.01 4.78c-2.14.08-4.07.69-5.53 1.67a2.05 2.05 0 0 0-1.46-.6c-1.15 0-2.08.93-2.08 2.08 0 .86.52 1.59 1.26 1.91-.03.2-.04.4-.04.61 0 3.2 3.7 5.8 8.25 5.8s8.25-2.6 8.25-5.8c0-.21-.01-.41-.04-.61.74-.32 1.26-1.05 1.26-1.91z"></path></svg>'
+            },
+            {
+                name: 'Google',
+                color: '#4285F4',
+                icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.545 10.239v3.821h5.445c-.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866.549 3.921 1.453l2.814-2.814C17.503 2.988 15.139 2 12.545 2 7.021 2 2.543 6.477 2.543 12s4.478 10 10.002 10c8.396 0 10.249-7.85 9.426-11.748l-9.426-.013z"></path></svg>'
+            },
+            {
+                name: 'Wikipedia',
+                color: '#b7b7b7',
+                icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.46 6h3.09v.64l-.88.1c-.24.03-.36.16-.36.38 0 .08.01.16.04.24l3.18 9.2 2.31-6.47-1.06-2.73c-.14-.36-.38-.55-.74-.59l-.78-.1V6h4.91v.64l-.87.1c-.28.03-.42.17-.42.42 0 .08.02.17.05.28l3.3 9.02 2.66-8.8c.06-.18.09-.34.09-.47 0-.23-.13-.37-.39-.41l-.95-.14V6h2.83v.64l-.42.09c-.31.07-.53.31-.66.73L15.44 19h-.81l-2.78-7.23L9.2 19h-.8L4.55 7.6c-.15-.43-.38-.68-.68-.75l-.37-.08V6h.96z"></path></svg>'
+            }
+        ];
+
+        window.addEventListener('load', () => {
+            if(localStorage.getItem('mythos_theme') === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('theme-toggle').checked = true;
+                updateHljsTheme(true);
+            }
+            
+            setTimeout(() => {
+                document.getElementById('boot-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('boot-screen').style.display = 'none';
+                    document.getElementById('app-wrapper').style.opacity = '1';
+                }, 1000);
+            }, 2000);
+        });
+
+        function toggleSettings(show) {
+            document.getElementById('settings-modal').style.display = show ? 'flex' : 'none';
+            if(!show) {
+                document.getElementById('admin-pass').value = '';
+                document.getElementById('login-error').style.display = 'none';
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function unlockAdmin() {
+            const pass = document.getElementById('admin-pass').value;
+            if (pass === 'admin') {
+                document.getElementById('admin-login-view').style.display = 'none';
+                document.getElementById('admin-console-view').style.display = 'block';
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
+        function toggleLightMode(isLight) {
+            if (isLight) {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('mythos_theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('mythos_theme', 'dark');
+            }
+            updateHljsTheme(isLight);
+        }
+
+        function updateHljsTheme(isLight) {
+            const hljsLink = document.getElementById('hljs-theme');
+            hljsLink.href = isLight 
+                ? "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css"
+                : "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css";
+        }
+
+        function handleEnter(e) { 
+            if (e.key === 'Enter' && !e.shiftKey) { 
+                e.preventDefault(); 
+                submitPrompt(); 
+            } 
+        }
+
+        function transitionVisibility(element, show, displayValue = 'block') {
+            if (!element) return;
+
+            if (show) {
+                element.style.display = displayValue;
+                element.classList.add('transition-hidden');
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        element.classList.remove('transition-hidden');
+                    });
+                });
+                return;
+            }
+
+            element.classList.add('transition-hidden');
+            setTimeout(() => {
+                if (element.classList.contains('transition-hidden')) {
+                    element.style.display = 'none';
+                }
+            }, 650);
+        }
+
+        function enterMythos() {
+            const loginError = document.getElementById('login-main-error');
+            const email = loginEmailInput.value.trim();
+
+            if (!email) {
+                loginError.style.display = 'block';
+                loginEmailInput.focus();
+                return;
+            }
+
+            loginError.style.display = 'none';
+            closeGoogleSignIn();
+            document.body.classList.remove('logged-out');
+            document.body.classList.add('logged-in');
+            transitionVisibility(sidebar, true, 'flex');
+            transitionVisibility(headerBar, true, 'flex');
+            transitionVisibility(postLoginWelcome, true, 'block');
+            transitionVisibility(homescreen, false);
+            transitionVisibility(inputAreaContainer, true, 'flex');
+            setTimeout(() => promptInput.focus(), 220);
+        }
+
+        function continueWithMythosId() {
+            enterMythos();
+        }
+
+        function signInWithGoogle() {
+            googleSigninScreen.style.display = 'flex';
+            googleEmailInput.value = loginEmailInput.value.trim();
+            document.getElementById('google-auth-error').style.display = 'none';
+            setTimeout(() => googleEmailInput.focus(), 80);
+        }
+
+        function closeGoogleSignIn() {
+            googleSigninScreen.style.display = 'none';
+        }
+
+        function completeGoogleSignIn() {
+            const email = googleEmailInput.value.trim();
+            const errorEl = document.getElementById('google-auth-error');
+            if (!email) {
+                errorEl.style.display = 'block';
+                googleEmailInput.focus();
+                return;
+            }
+            errorEl.style.display = 'none';
+            loginEmailInput.value = email;
+            closeGoogleSignIn();
+            enterMythos();
+        }
+
+        function setHomeMode(mode, button) {
+            const config = homeModes[mode];
+            if (!config) return;
+
+            homeGreeting.innerHTML = config.greeting;
+            homeDescription.textContent = config.description;
+            showcaseMessage.textContent = config.badge;
+            showcaseTitle.textContent = config.title;
+            showcaseCopyLeft.textContent = config.left;
+            showcaseCopyRight.textContent = config.right;
+
+        }
+
+        function resetHomeScreen() {
+            closeGoogleSignIn();
+            transitionVisibility(sidebar, false);
+            transitionVisibility(headerBar, false);
+            transitionVisibility(postLoginWelcome, false);
+            setTimeout(() => {
+                document.body.classList.remove('logged-in');
+                document.body.classList.add('logged-out');
+            }, 660);
+            transitionVisibility(homescreen, true, 'flex');
+            transitionVisibility(chatContainer, false);
+            transitionVisibility(inputAreaContainer, false);
+            chatContainer.innerHTML = '';
+            promptInput.value = '';
+            messageHistory = [messageHistory[0]];
+            isFirst = true;
+            setHomeMode('core');
+        }
+
+        async function typeHtmlCharacterByCharacter(container, htmlContent, speed = 10) {
+            container.innerHTML = "";
+            let currentHTML = "";
+            let i = 0;
+            
+            while (i < htmlContent.length) {
+                if (htmlContent[i] === '<') {
+                    let tagEnd = htmlContent.indexOf('>', i);
+                    if (tagEnd !== -1) {
+                        currentHTML += htmlContent.substring(i, tagEnd + 1);
+                        i = tagEnd + 1;
+                        container.innerHTML = currentHTML;
+                        continue;
+                    }
+                }
+                currentHTML += htmlContent[i];
+                container.innerHTML = currentHTML;
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                await new Promise(resolve => setTimeout(resolve, speed));
+                i++;
+            }
+        }
+
+        function injectAdminTest() {
+            toggleSettings(false);
+            const rawText = document.getElementById('admin-input').value;
+
+            if (isFirst) { 
+                transitionVisibility(postLoginWelcome, false);
+                transitionVisibility(homescreen, false);
+                transitionVisibility(chatContainer, true, 'flex');
+                isFirst = false; 
+            }
+            
+            appendUserMessage("ADMINISTRATOR: INJECTING RENDER TEST");
+            const aiWrapper = createAIMessageWrapper();
+            const aiContent = aiWrapper.querySelector('.ai-content');
+            const statusText = aiWrapper.querySelector('.status-text');
+
+            setTimeout(async () => {
+                aiWrapper.classList.remove('minimized');
+                statusText.innerText = "STREAMING INJECTION...";
+
+                const formattedHTML = formatAIResponse(rawText);
+                await typeHtmlCharacterByCharacter(aiContent, formattedHTML, 8);
+                finalizeAI(aiWrapper, "INJECTION RENDER COMPLETE");
+            }, 1200);
+        }
+
+        async function submitPrompt() {
+            const text = promptInput.value.trim();
+            if (!text) return;
+
+            if (isFirst) { 
+                transitionVisibility(postLoginWelcome, false);
+                transitionVisibility(homescreen, false);
+                transitionVisibility(chatContainer, true, 'flex');
+                isFirst = false; 
+            }
+
+            appendUserMessage(text);
+            promptInput.value = '';
+            messageHistory.push({ role: "user", content: text });
+
+            const aiWrapper = createAIMessageWrapper();
+            const aiContent = aiWrapper.querySelector('.ai-content');
+            const statusText = aiWrapper.querySelector('.status-text');
+
+            try {
+                const apiCall = fetch('https://models.github.ai/inference/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GITHUB_TOKEN}` },
+                    body: JSON.stringify({ messages: messageHistory, model: "gpt-4o", temperature: 0.8 })
+                });
+
+                const minimumWait = new Promise(resolve => setTimeout(resolve, 3000));
+                
+                const [response] = await Promise.all([apiCall, minimumWait]);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                
+                const data = await response.json();
+                let aiText = data.choices[0].message.content;
+                if (!/^\s*(hello|hi|hey|good\s(?:morning|afternoon|evening))/i.test(aiText)) {
+                    aiText = `Hello James!\n\n${aiText}`;
+                }
+                messageHistory.push({ role: "assistant", content: aiText });
+
+                aiWrapper.classList.remove('minimized');
+                statusText.innerText = "STREAMING DATA...";
+
+                const htmlText = formatAIResponse(aiText);
+                await typeHtmlCharacterByCharacter(aiContent, htmlText, 10);
+
+                finalizeAI(aiWrapper, "SYSTEM DOMINANCE ACHIEVED");
+            } catch (err) {
+                statusText.innerText = "CORE ERROR";
+                aiWrapper.classList.remove('minimized');
+                aiContent.innerHTML = `<span style="color:var(--error-red)">CONNECTION SEVERED: ${err.message}</span>`;
+                finalizeAI(aiWrapper, "PROCESS TERMINATED", true);
+            }
+        }
+
+        function detectFileType(fileName) {
+            const ext = fileName.includes('.') ? fileName.split('.').pop().toUpperCase() : 'FILE';
+            return ext;
+        }
+
+        function buildResponseDecorations(text) {
+            const fileMatches = [...new Set((text.match(/(?:[A-Za-z0-9_\-\/ ]+\.(?:html|css|js|ts|tsx|jsx|json|md|py|txt))/g) || []).map(item => item.trim()))].slice(0, 3);
+            const mentionsFiles = /file|files|html|css|javascript|code|updated|changed|edited|patched/i.test(text);
+            const mentionsSearch = /search|searched|looked up|source|reddit|google|wikipedia|x\b/i.test(text);
+
+            let worklog = '';
+            if (mentionsFiles || mentionsSearch) {
+                const cards = [];
+                if (mentionsFiles) {
+                    cards.push(`
+                        <div class="worklog-card">
+                            <div class="worklog-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+                            </div>
+                            <div class="worklog-copy">
+                                <div class="worklog-title">Worked through project files</div>
+                                <div class="worklog-meta">Structured edits, UI passes, and response rendering updates.</div>
+                            </div>
+                        </div>
+                    `);
+                }
+                if (mentionsSearch) {
+                    cards.push(`
+                        <div class="worklog-card">
+                            <div class="worklog-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                            </div>
+                            <div class="worklog-copy">
+                                <div class="worklog-title">Cross-checked sources and signals</div>
+                                <div class="worklog-meta">Active source scanning and comparison across multiple channels.</div>
+                            </div>
+                        </div>
+                    `);
+                }
+                worklog = `<div class="response-worklog">${cards.join('')}</div>`;
+            }
+
+            let filePills = '';
+            if (fileMatches.length) {
+                filePills = `
+                    <div class="file-pill-row">
+                        ${fileMatches.map(file => `
+                            <div class="file-pill">
+                                <div class="file-pill-name">${file}</div>
+                                <div class="file-pill-type">${detectFileType(file)}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            return { worklog, filePills };
+        }
+
+        function formatAIResponse(text) {
+            const codeBlocks = [];
+            
+            text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, function(match, lang, code) {
+                let highlightedCode = code;
+                if (window.hljs) {
+                    try {
+                        if (lang && hljs.getLanguage(lang)) {
+                            highlightedCode = hljs.highlight(code, { language: lang }).value;
+                        } else {
+                            highlightedCode = hljs.highlightAuto(code).value;
+                        }
+                    } catch(e) {}
+                }
+                codeBlocks.push(`<pre><code class="hljs ${lang || ''}">${highlightedCode}</code></pre>`);
+                return `%%%CODE_BLOCK_${codeBlocks.length - 1}%%%`;
+            });
+
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                       .replace(/\_\_(.*?)\_\_/g, '<u>$1</u>')
+                       .replace(/\~\~(.*?)\~\~/g, '<del>$1</del>')
+                       .replace(/\*([^\*]+)\*/g, '<em>$1</em>');
+
+            text = text.replace(/%%%CODE_BLOCK_(\d+)%%%/g, function(match, index) {
+                return codeBlocks[index];
+            });
+
+            const paragraphs = text
+                .split(/\n{2,}/)
+                .map(chunk => chunk.trim())
+                .filter(Boolean)
+                .map(chunk => `<p>${chunk.replace(/\n/g, '<br>')}</p>`)
+                .join('');
+
+            const decorations = buildResponseDecorations(text);
+            return `${decorations.worklog}${decorations.filePills}<div class="response-body-text">${paragraphs}</div>`;
+        }
+
+        function appendUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'message msg-user';
+            div.innerHTML = `<div class="bubble">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>`;
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function createAIMessageWrapper() {
+            const wrapperDiv = document.createElement('div');
+            wrapperDiv.className = 'message msg-ai';
+
+            wrapperDiv.innerHTML = `
+                <div class="ai-response-wrapper minimized">
+                    <div class="ai-header" onclick="toggleHeader(this)">
+                        <div class="status-content">
+                            <div class="search-icon-cycle" style="display: flex;"></div>
+                            <div class="tick-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg></div>
+                            <div class="cross-icon"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></div>
+                            <span class="status-text">SCANNING OPEN SOURCES...</span>
+                            <span class="search-source-label"></span>
+                        </div>
+                        <div class="ai-header-right">
+                            <button class="copy-btn" onclick="copyResponse(this, event)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                Copy
+                            </button>
+                            <div class="typing-dots">
+                                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                            </div>
+                            <svg class="header-arrow" viewBox="0 0 24 24">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ai-body"><div class="ai-content"></div></div>
+                </div>
+            `;
+            chatContainer.appendChild(wrapperDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            startSourceCycle(wrapperDiv);
+            return wrapperDiv;
+        }
+
+        function updateSearchSource(wrapper, index) {
+            const source = searchSources[index % searchSources.length];
+            const searchIcon = wrapper.querySelector('.search-icon-cycle');
+            const sourceLabel = wrapper.querySelector('.search-source-label');
+
+            searchIcon.innerHTML = source.icon;
+            searchIcon.style.color = source.color;
+            searchIcon.style.display = 'flex';
+            searchIcon.style.animation = 'none';
+            void searchIcon.offsetWidth;
+            searchIcon.style.animation = 'sourceSwipeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+
+            sourceLabel.textContent = source.name;
+            sourceLabel.style.animation = 'none';
+            void sourceLabel.offsetWidth;
+            sourceLabel.style.animation = 'sourceLabelSwipe 0.45s cubic-bezier(0.22, 1, 0.36, 1)';
+        }
+
+        function startSourceCycle(wrapper) {
+            const root = wrapper.querySelector('.ai-response-wrapper');
+            const startIndex = Math.floor(Math.random() * searchSources.length);
+            let currentIndex = startIndex;
+
+            updateSearchSource(wrapper, currentIndex);
+            currentIndex++;
+
+            const cycleId = setInterval(() => {
+                updateSearchSource(wrapper, currentIndex);
+                currentIndex++;
+            }, 900);
+
+            root.dataset.searchCycleId = String(cycleId);
+        }
+
+        function finalizeAI(wrapper, finalMessage, isError = false) {
+            const header = wrapper.querySelector('.ai-header');
+            const root = wrapper.querySelector('.ai-response-wrapper');
+            const statusText = header.querySelector('.status-text');
+            const searchIcon = header.querySelector('.search-icon-cycle');
+            const sourceLabel = header.querySelector('.search-source-label');
+            const tickIcon = header.querySelector('.tick-icon');
+            const crossIcon = header.querySelector('.cross-icon');
+            const typingDots = header.querySelector('.typing-dots');
+            const copyButton = header.querySelector('.copy-btn');
+
+            if (root.dataset.searchCycleId) {
+                clearInterval(Number(root.dataset.searchCycleId));
+                delete root.dataset.searchCycleId;
+            }
+
+            searchIcon.style.display = 'none';
+            sourceLabel.style.display = 'none';
+            typingDots.style.display = 'none';
+            copyButton.classList.add('ready');
+            
+            if (isError) {
+                crossIcon.style.display = 'flex';
+                statusText.style.color = "var(--error-red)";
+            } else {
+                tickIcon.style.display = 'flex';
+            }
+            
+            statusText.innerText = finalMessage;
+            
+            if (window.hljs) {
+                wrapper.querySelectorAll('pre code').forEach((block) => {
+                    if (!block.classList.contains('hljs')) {
+                        hljs.highlightElement(block);
+                    }
+                });
+            }
+        }
+
+        function toggleHeader(element) {
+            const wrapper = element.closest('.ai-response-wrapper');
+            if (element.querySelector('.typing-dots').style.display === 'none') {
+                wrapper.classList.toggle('minimized');
+            }
+        }
+
+        function copyResponse(btn, event) {
+            if (event) event.stopPropagation();
+            const wrapper = btn.closest('.ai-response-wrapper');
+            const contentDiv = wrapper ? wrapper.querySelector('.ai-content') : null;
+            if (!contentDiv || !contentDiv.innerText.trim()) return;
+            let textToCopy = contentDiv.innerText;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
